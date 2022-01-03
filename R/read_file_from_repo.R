@@ -13,7 +13,8 @@
 #' private repository or not. The default is FALSE.
 #' 
 #' @details This function relies on the `keyring` package to retrieve a stored
-#' GitHub Personal Access Token (PAT) to access private repositories.
+#' GitHub Personal Access Token (PAT) to access private repositories. This is
+#' safer than storing the PAT in the environment. 
 #' 
 #' @examples
 #' \dontrun{

@@ -30,6 +30,11 @@ private repository or not. The default is FALSE.}
 \description{
 \code{read_file_from_repo} reads a file from a GitHub repository.
 }
+\details{
+This function relies on the \code{keyring} package to retrieve a stored
+GitHub Personal Access Token (PAT) to access private repositories. This is
+safer than storing the PAT in the environment.
+}
 \examples{
 \dontrun{
 data <- read_file_from_repo(
