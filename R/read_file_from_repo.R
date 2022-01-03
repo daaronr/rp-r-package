@@ -11,6 +11,14 @@
 #' this is 'rethinkpriorities'.
 #' @param private A boolean value indicating whether the GitHub repository is a 
 #' private repository or not. The default is FALSE.
+#' 
+#' @examples
+#' \dontrun{
+#' data <- read_file_from_repo(
+#'   repo = "ea-data", path = "data/edited_data/sexual_orientation.csv", 
+#'   token_key = "github-PAT", private = TRUE
+#' )
+#' }
 #'
 #' @export
 read_file_from_repo <- function(repo, path, token_key, 
@@ -31,8 +39,8 @@ read_file_from_repo <- function(repo, path, token_key,
       error = function(e) {
         message(e)
         message("\n")
-        message("HINT: Use keyring::key_set() to set the token with the token 
-          key.")
+        message(paste("HINT: Use keyring::key_set() to set the token with the", "
+          token key."))
       }
     )
     
@@ -46,6 +54,11 @@ read_file_from_repo <- function(repo, path, token_key,
     results <- httr::GET(
       url = url
     )
+  }
+  
+  # Throw an error if the results are not found
+  if (results$status_code == 404) {
+    stop("Error: Not found.")
   }
   
   # Get the content

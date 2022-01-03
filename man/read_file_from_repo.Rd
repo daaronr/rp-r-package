@@ -30,3 +30,12 @@ private repository or not. The default is FALSE.}
 \description{
 \code{read_file_from_repo} reads a file from a GitHub repository.
 }
+\examples{
+\dontrun{
+data <- read_file_from_repo(
+  repo = "ea-data", path = "data/edited_data/sexual_orientation.csv", 
+  token_key = "github-PAT", private = TRUE
+)
+}
+
+}
