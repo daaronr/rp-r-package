@@ -12,6 +12,9 @@
 #' @param private A boolean value indicating whether the GitHub repository is a 
 #' private repository or not. The default is FALSE.
 #' 
+#' @details This function relies on the `keyring` package to retrieve a stored
+#' GitHub Personal Access Token (PAT) to access private repositories.
+#' 
 #' @examples
 #' \dontrun{
 #' data <- read_file_from_repo(
