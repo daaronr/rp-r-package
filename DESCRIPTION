@@ -1,0 +1,12 @@
+Package: rethinkpriorities
+Title: Rethink Priority's R Package
+Version: 0.1
+Authors@R: 
+    person("Willem", "Sleegers", , "willem@rethink.org", role = c("aut", "cre"))
+Description: This package contains several functions useful for the kind of 
+    work that is done at Rethink Priorities.
+License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
+    license
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
