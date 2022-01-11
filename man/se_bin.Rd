@@ -7,14 +7,14 @@
 se_bin(x)
 }
 \arguments{
-\item{x}{A vector that bla bla.}
+\item{x}{A vector of binary values that is numeric or can be coerced to be numeric.}
 }
 \description{
-\code{se_bin} calculates the SE of bla bla.
+\code{se_bin} calculates the SE of input vector
 }
 \examples{
 # Here is an example
-x <- c(0:10, 50)
+x <- sample(x = c(0, 1),  size = 10, replace = TRUE)
 se_bin(x)
 
 }
