@@ -17,3 +17,26 @@ Note that the name of the R package is different from the name of the GitHub rep
 ## Tips on adding functions to this package
 
 [illustration of how to add a function here](https://www.dropbox.com/s/7lbmrdhjgalzoic/adding_a_function_to_rp_r_package_2380608530.mp4?dl=0) (video)
+
+## Notes on the functions added
+
+DR: I went through my `functions.R` file and added nearly all the functions actually used in EA Survey work (plus a very few more that I thought were worth highlighting).
+
+Note that some of these functions/R files...:
+
+- are just slight tweaks on existing functions, setting options or whatever
+
+- are only used in the ML tidymodels work
+
+- some .R files have multiple exported functions, not sure I did this right
+
+- some are not very 'general use', as they refer to specific existing relative folder paths, or require other packages installed (which I've tried to document, but not always)
+
+## Other relevant packages/repos
+
+DR:
+
+- I started an additional [’noodling functions’ package](https://github.com/rethinkpriorities/r-noodling-package). Those are functions that are just helpful when dynamically working in R; they are mainly not for producing output.
+
+- As noted above, most of these functions were used in [ea data](https://github.com/rethinkpriorities/ea-data) work. However, some of these might be improved or replaced
+
