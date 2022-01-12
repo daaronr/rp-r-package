@@ -2,7 +2,7 @@
 % Please edit documentation in R/zero_to_missing.R
 \name{zero_to_missing}
 \alias{zero_to_missing}
-\title{Explanation in one sentence}
+\title{Missing to zero and vice versa}
 \usage{
 zero_to_missing(x)
 }

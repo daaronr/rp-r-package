@@ -1,4 +1,4 @@
-#' Explanation in one sentence
+#' Missing to zero and vice versa
 #'
 #' \code{zero_to_missing} turns 0 values into NA values in a data frame or vector
 #' \code{missing_to_zero} turns NA values into 0 values in a data frame or vector
