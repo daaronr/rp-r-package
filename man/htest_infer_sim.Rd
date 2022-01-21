@@ -34,9 +34,11 @@ htest_infer_sim(
 \code{htest_infer_sim} works through the Infer package to  generate samples and a p-value from a 'null hypothesis distribution'. Written (mainly) by Oska Fentem, originally called "test_hypothesis"
 }
 \details{
-' Given a formula, null hypothesis and arguments for generating samples:
+We used it for testing whether the median of a difference (input as a single column) is likely to be distinct from 0.
+Having this function enabled us to purrr map a bunch of stuff
+Given a formula pr null hypothesis and arguments for generating samples:
 Generate samples under this null
-#' If p_val_dir is supplied, then the function computes a p-value for observed data given the null
+If p_val_dir is supplied, then the function computes a p-value for observed data given the null
 }
 \examples{
 
@@ -46,5 +48,5 @@ stat = "median",
 hypothesis = list(null = "point", med = 0),
 gen =  list(reps = 1000, type = "bootstrap"),
 response = "gear_d_carb",
-p_val_dir = "two_sided"))
+p_val_dir = "two_sided")
 }
