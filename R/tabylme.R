@@ -1,6 +1,7 @@
 #' simple tables and tabsum ####
 #'
-#' \code{tabyl_ow_plus} is a function that makes a one-way 'tabyl' style table, arranged in descending order of frequency,  and kabling and styling it
+#' \code{tabyl_ow}  makes a one-way 'tabyl' style table, arranged in descending order of frequency, not showing missing levels, and making it actually percents
+#' \code{tabyl_ow_plus} does the same as tabyl_ow, but also kables and styles it
 #' \code{tabylme} is a function that makes a two-way 'tabyl' style table, adding row percentages, and kabling and styling it
 
 #'
@@ -15,9 +16,19 @@
 
 #' @export
 
+tabyl_ow <- function(df, var) {
+    df %>%
+    tabyl({{var}}, show_missing_levels = FALSE) %>%
+        mutate(percent = 100*percent) %>%
+        dplyr::arrange(desc(n))
+}
+
+#' @export
+
 tabyl_ow_plus <- function(df, var, caption=NULL, title_case = FALSE) {
   df <- {{df}} %>%
-    tabyl({{var}}) %>%
+    tabyl({{var}}, show_missing_levels = FALSE) %>%
+    mutate(percent = 100*percent) %>%
     dplyr::arrange(desc(n)) %>%
     adorn_totals()
 
