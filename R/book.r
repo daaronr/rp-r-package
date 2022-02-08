@@ -74,9 +74,24 @@ build_toc <- function(toc) {
         replacement = paste0(
           '<a id="item-', 
           id, 
-          '" class="list-group-item ps-3" href=')
+          '" class="list-group-item" href=')
         )
     }
+    
+    if (stringr::str_detect(toc[i], "toc-section-number") & 
+        stringr::str_detect(toc[i], "</span> ")) {
+      toc[i] <- stringr::str_replace(
+        string = toc[i], 
+        pattern = "</span> ", 
+        replacement = "</span><span>"
+      )
+      toc[i] <- stringr::str_replace(
+        string = toc[i], 
+        pattern = "</a></li>", 
+        replacement = "</span></a></li>"
+      )
+    }
+    
   } 
   
   return(toc)
@@ -193,7 +208,7 @@ build_page <- function(
     nav,
     '<!-- Page content-->
     <div id="main-container" class="container-fluid">',
-    '<main class="mx-md-5">',
+    '<main>',
     chapter,
     '<div class="text-center m-3">',
     ifelse(

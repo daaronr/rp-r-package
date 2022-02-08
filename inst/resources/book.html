@@ -119,7 +119,7 @@ $endif$
 
 <!--bookdown:toc:start-->
 $if(toc)$
-<div class="border-end bg-white vh-100" id="sidebar-wrapper">
+<div class="border-end bg-white" id="sidebar-wrapper">
   <div id="sidebar-heading" class="border-bottom bg-light">
     <img src="$logo$" width="25px" height="25px"/>
     <span class="text-nowrap">$title$</span>
@@ -171,6 +171,15 @@ for (foldable of foldables) {
     })
   }
 }
+
+</script>
+
+<script src="https://unpkg.com/vh-check/dist/vh-check.min.js"></script>
+<script>
+  (function () {
+    // initialize the test
+    var test = vhCheck();
+  }());
 </script>
 
 <script>
