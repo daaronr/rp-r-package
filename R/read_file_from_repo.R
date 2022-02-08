@@ -1,16 +1,17 @@
 #' Read a file from a (personal) GitHub repository
 #'
-#' \code{read_file_from_repo} reads a file from a GitHub repository.
+#' \code{read_file_from_repo} reads a file from a GitHub repository. Both public
+#' and personal repositories are supported. 
 #'
 #' @param repo A character string specifying the GitHub repository.
 #' @param path A character string specifying the file path in the GitHub 
 #' repository.
-#' @param token_key A character string specifying the key to the GitHub personal 
-#' access token (PAT), stored using the \code(keyring) package.
 #' @param user A character string specifying the GitHub user name. By default 
 #' this is 'rethinkpriorities'.
 #' @param private A boolean value indicating whether the GitHub repository is a 
 #' private repository or not. The default is FALSE.
+#' @param token_key A character string specifying the key to the GitHub personal 
+#' access token (PAT), stored using the \code{keyring} package.
 #' 
 #' @details This function relies on the `keyring` package to retrieve a stored
 #' GitHub Personal Access Token (PAT) to access private repositories. This is
@@ -20,7 +21,7 @@
 #' \dontrun{
 #' data <- read_file_from_repo(
 #'   repo = "ea-data", path = "data/edited_data/sexual_orientation.csv", 
-#'   token_key = "github-PAT", private = TRUE
+#'   private = TRUE, token_key = "github-PAT"
 #' )
 #' }
 #'

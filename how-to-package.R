@@ -4,9 +4,8 @@
 # Update documentation and (re)install the package
 devtools::document()
 devtools::install()
-# install.packages("roxygen2")
-# library("roxygen2")
 
+# Unload the package and load it again
 detach("package:rethinkpriorities", unload = TRUE)
 library(rethinkpriorities)
 

@@ -15,4 +15,5 @@ zero_to_missing(x)
 }
 \examples{
 zero_to_missing(mtcars)
+
 }

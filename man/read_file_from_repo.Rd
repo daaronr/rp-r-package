@@ -19,7 +19,7 @@ read_file_from_repo(
 repository.}
 
 \item{token_key}{A character string specifying the key to the GitHub personal
-access token (PAT), stored using the \code(keyring) package.}
+access token (PAT), stored using the \code{keyring} package.}
 
 \item{user}{A character string specifying the GitHub user name. By default
 this is 'rethinkpriorities'.}
@@ -28,7 +28,8 @@ this is 'rethinkpriorities'.}
 private repository or not. The default is FALSE.}
 }
 \description{
-\code{read_file_from_repo} reads a file from a GitHub repository.
+\code{read_file_from_repo} reads a file from a GitHub repository. Both public
+and personal repositories are supported.
 }
 \details{
 This function relies on the \code{keyring} package to retrieve a stored
@@ -39,7 +40,7 @@ safer than storing the PAT in the environment.
 \dontrun{
 data <- read_file_from_repo(
   repo = "ea-data", path = "data/edited_data/sexual_orientation.csv", 
-  token_key = "github-PAT", private = TRUE
+  private = TRUE, token_key = "github-PAT"
 )
 }
 

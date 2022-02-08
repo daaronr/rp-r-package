@@ -5,21 +5,18 @@
 #'
 #' @param x what inputs to function
 #'
-#'
-#'
 #' @examples
 #' zero_to_missing(mtcars)
-
+#' 
+#' @export
 zero_to_missing <- function(x){
   x[x == 0] <- NA
   return(x)
 }
 
 #' @export
-
 missing_to_zero <- function (v)
 {
   v[is.na(v) == TRUE] <- 0
   return(v)
 }
-
