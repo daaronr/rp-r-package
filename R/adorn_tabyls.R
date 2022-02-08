@@ -17,9 +17,6 @@
 #'  XXX nothing(mtcars)
 
 #' @export
-
-
-# ... formatting default options for tabyl ####
 tabylstuff <- function(df, cap = "") {
   adorn_totals(df, c("row", "col")) %>% adorn_percentages("row") %>%
     adorn_pct_formatting(digits = 1) %>% adorn_ns() %>% kable(caption = cap) %>%

@@ -43,8 +43,5 @@ export(tabyl_ow_plus)
 export(tabylme)
 export(tabylstuff)
 export(tabylstuff_nocol)
-<<<<<<< HEAD
-export(zero_to_missing)
-=======
 export(try_download)
->>>>>>> ba61cc00b04b9ff5bc6bd89db0adda041f11972d
+export(zero_to_missing)
