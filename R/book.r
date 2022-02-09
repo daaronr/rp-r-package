@@ -8,6 +8,7 @@ book <- function(
   lib_dir = 'libs', 
   pandoc_args = NULL, 
   extra_dependencies = NULL,
+  hide_code = FALSE,
   ...
 ) {
   template <- system.file(
@@ -28,8 +29,21 @@ book <- function(
     split_bib = TRUE,
     split_by = "chapter",
     extra_dependencies = c(book_dependency(), extra_dependencies), 
-    highlight = "tango"
+    highlight = "default"
   )
+  
+  post = config$post_processor
+  config$post_processor = function(metadata, input, output, clean, verbose) {
+    if (is.function(post)) output = post(metadata, input, output, clean, verbose)
+
+    # a hack to remove Pandoc's margin for code blocks since gitbook has already
+    # defined margin on <pre> (there would be too much bottom margin)
+    #x = xfun::read_utf8(output)
+    #x = x[x != 'div.sourceCode { margin: 1em 0; }']
+    #xfun::write_utf8(x, output)
+
+    output
+  }
   
   config
 }
@@ -156,6 +170,7 @@ build_nav <- function() {
 
 build_chapter <- function(chapter) {
   in_div <- FALSE
+   refs_found <- 0
   
   for (i in 1:length(chapter)) {
     x <- chapter[i]
@@ -188,6 +203,22 @@ build_chapter <- function(chapter) {
       )
     }
     
+    # Remove references at the end of the book
+    if (stringr::str_detect(x, '<div id="refs"')) {
+      refs_found <- 1
+    }
+    
+    if (refs_found > 0 & stringr::str_detect(x, '<div class="csl-entry">')) {
+      refs_found <- refs_found + 1
+    }
+    
+    if (refs_found > 0) {
+      chapter[i] <- ""
+    }
+    
+    if (refs_found > 0 & stringr::str_detect(x, "</div>")) {
+      refs_found <- refs_found - 1
+    }
   }
   
   return(chapter)
