@@ -1,4 +1,5 @@
 #' Functions to deal with lists and text
+
 #'
 #' \code{lab_list_to_text} turns a labled list into text, mainly used for inline code
 #'
@@ -13,7 +14,7 @@
 
 lab_list_to_text <- function(df) {
   df %>%
-    labelled::var_label %>% unname %>% unlist() %>%
+    var_label %>% unname %>% unlist() %>%
     paste(collapse = ', ')
 }
 
