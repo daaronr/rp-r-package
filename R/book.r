@@ -52,7 +52,7 @@ build_toc <- function(toc) {
   # Set the TOC depth
   toc_depth = 0
   
-  # Remove all 'li' elements
+  # Remove all the li elements
   toc <- stringr::str_replace_all(
     string = toc, 
     pattern = "<li>|</li>", 
@@ -61,37 +61,49 @@ build_toc <- function(toc) {
   
   # Loop over each element in the TOC vector and adjust the content if needed
   for (i in 1:length(toc)) {
-    x = toc[i]
-    
-    if (stringr::str_detect(x, "<ul>")) {
+    # Convert the ul elements to divs and set the bootstrap classes
+    # Different classes are assigned depending on the toc depth
+    if (stringr::str_detect(toc[i], "<ul>")) {
       toc_depth = toc_depth + 1
       
       if (toc_depth == 1) {
-        toc[i] <- stringr::str_replace(x, "<ul>", 
+        toc[i] <- stringr::str_replace(toc[i], "<ul>", 
           '<div id="TOC" class="list-group list-group-flush">')
       } else {
-        toc[i] <- stringr::str_replace(x, "<ul>", 
+        toc[i] <- stringr::str_replace(toc[i], "<ul>", 
           '<div class="list-group list-group-flush list-subgroup">')
       }
     }
     
-    if (stringr::str_detect(x, "</ul>")) {
+    if (stringr::str_detect(toc[i], "</ul>")) {
       toc_depth = toc_depth - 1
-      toc[i] <- stringr::str_replace(x, "</ul>", '</div>')
+      toc[i] <- stringr::str_replace(toc[i], "</ul>", '</div>')
     }
     
-    if (stringr::str_detect(x, "<a href=")) {
+    # Set classes on the toc links and also add an identifier
+    if (stringr::str_detect(toc[i], "<a href=")) {
       id = stringr::str_extract(toc[i], '(?<=html#).+?(?=")')
       toc[i] <- stringr::str_replace(
-        string = x, 
+        string = toc[i], 
         pattern = "<a href=", 
         replacement = paste0(
           '<a id="item-', 
           id, 
           '" class="list-group-item" href=')
         )
+      
+      # Remove the heading part from the link so the page loads simply loads 
+      # from the top and does not scroll to the first heading
+      if (toc_depth == 1) {
+        toc[i] <- stringr::str_replace(
+          string = toc[i], 
+          pattern = paste0("#", id), 
+          replacement = ""
+        )
+      }
     }
     
+    # Add span tags to the toc values (i.e., the link names)
     if (stringr::str_detect(toc[i], "toc-section-number") & 
         stringr::str_detect(toc[i], "</span> ")) {
       toc[i] <- stringr::str_replace(
@@ -99,13 +111,7 @@ build_toc <- function(toc) {
         pattern = "</span> ", 
         replacement = "</span><span>"
       )
-      toc[i] <- stringr::str_replace(
-        string = toc[i], 
-        pattern = "</a></li>", 
-        replacement = "</span></a></li>"
-      )
     }
-    
   } 
   
   return(toc)
@@ -158,7 +164,7 @@ build_nav <- function() {
               <div 
                 class="dropdown-menu dropdown-menu-end" 
                 aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#!">Toggle code</a>
+                  <a id="toggleCodeButton" class="dropdown-item" href="#!">Toggle code</a>
               </div>
             </li>
           </ul>
@@ -170,54 +176,79 @@ build_nav <- function() {
 
 build_chapter <- function(chapter) {
   in_div <- FALSE
-   refs_found <- 0
+  correct_refs_found <- 0
+  refs_found <- 0
+  pre_found <- 0
   
   for (i in 1:length(chapter)) {
-    x <- chapter[i]
-    
-    if (x == '<div class="foldable">') {
+    if (chapter[i] == '<div class="foldable">') {
       in_div <- TRUE
       chapter[i] <- '<div class="foldable"><a>Show me more</a><div class="collapse">'
     }
     
     if (in_div) {
-      if (x == "</div>") {
+      if (chapter[i] == "</div>") {
         in_div <- FALSE
         chapter[i] <- "</div></div>"
       }
     }
     
-    if (stringr::str_detect(x, "<table")) {
+    if (stringr::str_detect(chapter[i], "<table")) {
       chapter[i] <- stringr::str_replace(
-        string = x, 
+        string = chapter[i], 
         pattern = "<table", 
         replacement = '<div class="table-container overflow-auto"><table class="table"'
       )
     } 
     
-    if (stringr::str_detect(x, "</table>")) {
+    if (stringr::str_detect(chapter[i], "</table>")) {
       chapter[i] <- stringr::str_replace(
-        string = x, 
+        string = chapter[i], 
         pattern = "</table>", 
         replacement = '</table></div>'
       )
     }
     
+    # Hide code blocks by default
+    if (stringr::str_detect(chapter[i], '<pre class="sourceCode r">')) {
+      chapter[i] <- stringr::str_replace(
+        string = chapter[i], 
+        pattern = '<pre class="sourceCode r">', 
+        replacement = '<pre class="sourceCode r collapse"><div>'
+      )
+      pre_found <- 1
+    }
+    
+    if (pre_found & stringr::str_detect(chapter[i], '</pre>')) {
+      chapter[i] <- stringr::str_replace(
+        string = chapter[i], 
+        pattern = '</pre>', 
+        replacement = '</div></pre>'
+      )
+      pre_found <- 0
+    }
+    
     # Remove references at the end of the book
-    if (stringr::str_detect(x, '<div id="refs"')) {
-      refs_found <- 1
+    if (stringr::str_detect(chapter[i], '<h3>References</h3>')) {
+      correct_refs_found <- 1
     }
     
-    if (refs_found > 0 & stringr::str_detect(x, '<div class="csl-entry">')) {
-      refs_found <- refs_found + 1
-    }
-    
-    if (refs_found > 0) {
-      chapter[i] <- ""
-    }
-    
-    if (refs_found > 0 & stringr::str_detect(x, "</div>")) {
-      refs_found <- refs_found - 1
+    if (!correct_refs_found) {
+      if (stringr::str_detect(chapter[i], '<div id="refs"')) {
+       refs_found <- 1
+      }
+  
+      if (refs_found > 0 & stringr::str_detect(chapter[i], '<div class="csl-entry">')) {
+        refs_found <- refs_found + 1
+      }
+  
+      if (refs_found > 0) {
+        chapter[i] <- ""
+      }
+  
+      if (refs_found > 0 & stringr::str_detect(chapter[i], "</div>")) {
+        refs_found <- refs_found - 1
+      }
     }
   }
   

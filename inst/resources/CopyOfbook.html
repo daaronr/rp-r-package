@@ -42,9 +42,9 @@ $if(highlightjs)$
 
 <script type="text/javascript">
 if (window.hljs && document.readyState && document.readyState === "complete") {
-  window.setTimeout(function() {
-    hljs.initHighlighting();
-  }, 0);
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
 }
 </script>
 $endif$
@@ -71,13 +71,13 @@ $endfor$
 />
 
 $for(header-includes)$
-$header-includes$
-$endfor$
+  $header-includes$
+  $endfor$
 
 </head>
 
 <body>
-  <div id="wrapper" class="d-flex">
+  <div class="d-flex" id="wrapper">
     
 $for(include-before)$
 $include-before$
@@ -174,17 +174,15 @@ for (foldable of foldables) {
 
 </script>
 
+<script src="https://unpkg.com/vh-check/dist/vh-check.min.js"></script>
 <script>
-// Create toggle code function
-toggleCode = function() {
-  const mainContainer = document.getElementById("main-container")
-  const codes = mainContainer.getElementsByClassName('sourceCode r collapse')
-  
-  for (code of codes) {
-    new bootstrap.Collapse(code, {toggle: true})
-  }
-}
+  (function () {
+    // initialize the test
+    var test = vhCheck();
+  }());
+</script>
 
+<script>
 // Add sidebar toggle functionality
 window.addEventListener('DOMContentLoaded', event => {
   // Toggle the side navigation
@@ -203,10 +201,6 @@ window.addEventListener('DOMContentLoaded', event => {
       );
     });
   }
-  
-  // Add toggle code function to toggle code button
-  const toggleCodeButton = document.getElementById("toggleCodeButton")
-  toggleCodeButton.onclick = toggleCode
 });
 </script>
 
