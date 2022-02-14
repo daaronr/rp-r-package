@@ -32,11 +32,11 @@ geom_tree_tot_by_split <- function(df, outcome, splitvar, title = "",
                                    )) {
   #TODO -- make a 'summary stat' argument
   df %>%
+    dplyr::filter(!is.na({{splitvar}})) %>%
     select({{outcome}}, {{splitvar}}) %>%
     group_by({{splitvar}}) %>%
   summarise(total_outcome = sum({{outcome}}, na.rm=TRUE)) %>%
   mutate(outcome_share = round(total_outcome/sum(total_outcome)*100)) %>%
-  filter(!is.na({{splitvar}})) %>%
   ggplot(aes(area = total_outcome, fill= {{splitvar}},
              # Include percentage of total donation
              label = paste({{splitvar}}, paste0(outcome_share, "%"), sep = "\n"))) +
