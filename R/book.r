@@ -183,7 +183,7 @@ build_chapter <- function(chapter) {
   for (i in 1:length(chapter)) {
     if (chapter[i] == '<div class="foldable">') {
       in_div <- TRUE
-      chapter[i] <- '<div class="foldable"><a>Show me more</a><div class="collapse">'
+      chapter[i] <- '<div class="foldable"><a>Show</a><div class="collapse">'
     }
     
     if (in_div) {
