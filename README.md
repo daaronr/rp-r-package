@@ -2,6 +2,8 @@
 
 This is the `rethinkpriorities` R package. The goal of this package is to collect R functions that are likely to be re-used across projects from Rethink Priorities. As such, this package is for internal use only.
 
+This repo *also* includes functions the `rethinkpriorities::book` style; see [hosted example and 'how-to'](https://rethinkpriorities.github.io/bookdown-template/)
+
 ## Installation
 
 Currently there are no plans to submit this package to CRAN, so the package can be installed from this GitHub repository, using the following code:
@@ -14,9 +16,11 @@ After installing the package, you can load the package using `library(rethinkpri
 
 Note that the name of the R package is different from the name of the GitHub repository.
 
-## Tips on adding functions to this package
+## Tips on adding functions to this package (and adjusting the style)
 
 [illustration of how to add a function here](https://www.dropbox.com/s/7lbmrdhjgalzoic/adding_a_function_to_rp_r_package_2380608530.mp4?dl=0) (video)
+
+[Tweaking and viewing the RPR style css in Chrome, adjusting it in the RP package (video)](https://www.dropbox.com/s/l87jnsipitzdnkv/css_for_rp_bookdown_previewing_editing.mp4?dl=0)
 
 ## Notes on the functions added
 
