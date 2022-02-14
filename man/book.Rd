@@ -11,6 +11,7 @@ book(
   lib_dir = "libs",
   pandoc_args = NULL,
   extra_dependencies = NULL,
+  hide_code = FALSE,
   ...
 )
 }
