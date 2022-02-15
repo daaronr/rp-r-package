@@ -272,7 +272,7 @@ build_page <- function(
     <div id="main-container" class="container-fluid">',
     '<main>',
     chapter,
-    '<div class="text-center m-3">',
+    '<div class="text-center m-5">',
     ifelse(
       length(link_prev) != 0, 
       sprintf(
