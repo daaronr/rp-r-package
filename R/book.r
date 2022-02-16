@@ -29,7 +29,8 @@ book <- function(
     split_bib = TRUE,
     split_by = "chapter",
     extra_dependencies = c(book_dependency(), extra_dependencies), 
-    highlight = "default"
+    highlight = "default",
+    ...
   )
   
   post = config$post_processor
