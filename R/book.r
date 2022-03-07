@@ -2,14 +2,17 @@
 #'
 #' @export
 book <- function(
-  fig_caption = TRUE, 
+  toc = TRUE, 
   number_sections = TRUE, 
-  anchor_sections = TRUE, 
-  lib_dir = 'libs', 
+  fig_caption = TRUE, 
+  lib_dir = 'libs',
+  global_numbering = !number_sections, 
   pandoc_args = NULL, 
-  extra_dependencies = NULL,
-  hide_code = FALSE,
-  ...
+  ...,
+  base_format = rmarkdown::html_document,
+  split_bib = TRUE, 
+  split_by = c('section+number', 'section', 'chapter+number', 'chapter', 'rmd', 
+    'none')
 ) {
   template <- system.file(
     "resources", "book.html", 
@@ -17,36 +20,62 @@ book <- function(
     mustWork = TRUE
   )
   
-  config <- bookdown::html_chapters(
-    toc = TRUE,
+  bookdown::html_chapters(
+    toc = toc, 
     number_sections = number_sections, 
-    fig_caption = fig_caption,
-    anchor_sections = anchor_sections,
-    lib_dir = lib_dir, 
-    theme = NULL,
+    fig_caption = fig_caption, 
+    lib_dir = lib_dir,
     template = template,
+    global_numbering = global_numbering, 
+    pandoc_args = pandoc_args, 
+    ...,
+    base_format = base_format, 
+    split_bib = split_bib, 
     page_builder = build_page,
-    split_bib = TRUE,
-    split_by = "chapter",
-    extra_dependencies = c(book_dependency(), extra_dependencies), 
-    highlight = "default",
-    ...
+    split_by = split_by
   )
-  
-  post = config$post_processor
-  config$post_processor = function(metadata, input, output, clean, verbose) {
-    if (is.function(post)) output = post(metadata, input, output, clean, verbose)
+}
 
-    # a hack to remove Pandoc's margin for code blocks since gitbook has already
-    # defined margin on <pre> (there would be too much bottom margin)
-    #x = xfun::read_utf8(output)
-    #x = x[x != 'div.sourceCode { margin: 1em 0; }']
-    #xfun::write_utf8(x, output)
-
-    output
-  }
+build_page <- function(
+  head, toc, chapter, link_prev, link_next, rmd_cur, html_cur, foot
+) {
+  toc <- build_toc(toc)
+  nav <- build_nav()
+  chapter <- build_chapter(chapter)
   
-  config
+  paste(c(
+    head,
+    toc,
+    '<!-- Page content wrapper-->
+    <div id="page-content-wrapper">',
+    nav,
+    '<!-- Page content-->
+    <div id="main-container" class="container-fluid">',
+    '<main>',
+    chapter,
+    '<div class="text-center m-5">',
+    ifelse(
+      length(link_prev) != 0, 
+      sprintf(
+        '<a href="%s"><button class="btn btn-secondary">%s</button></a>', 
+        link_prev, 'Previous'
+      ), 
+      ""
+    ),
+    ifelse(
+      length(link_next) != 0, 
+      sprintf(
+        '<a href="%s"><button class="btn btn-secondary">%s</button></a>', 
+        link_next, 'Next'
+      ), 
+      ""
+    ),
+    '</div>',
+    '</main>',
+    '</div>',
+    '</div>',
+    foot
+  ), collapse = '\n')
 }
 
 build_toc <- function(toc) {
@@ -175,6 +204,7 @@ build_nav <- function() {
   )
 }
 
+
 build_chapter <- function(chapter) {
   in_div <- FALSE
   correct_refs_found <- 0
@@ -254,48 +284,6 @@ build_chapter <- function(chapter) {
   }
   
   return(chapter)
-}
-
-build_page <- function(
-  head, toc, chapter, link_prev, link_next, rmd_cur, html_cur, foot
-) {
-  toc <- build_toc(toc)
-  nav <- build_nav()
-  chapter <- build_chapter(chapter)
-  
-  paste(c(
-    head,
-    toc,
-    '<!-- Page content wrapper-->
-    <div id="page-content-wrapper">',
-    nav,
-    '<!-- Page content-->
-    <div id="main-container" class="container-fluid">',
-    '<main>',
-    chapter,
-    '<div class="text-center m-5">',
-    ifelse(
-      length(link_prev) != 0, 
-      sprintf(
-        '<a href="%s"><button class="btn btn-secondary">%s</button></a>', 
-        link_prev, 'Previous'
-      ), 
-      ""
-    ),
-    ifelse(
-      length(link_next) != 0, 
-      sprintf(
-        '<a href="%s"><button class="btn btn-secondary">%s</button></a>', 
-        link_next, 'Next'
-      ), 
-      ""
-    ),
-    '</div>',
-    '</main>',
-    '</div>',
-    '</div>',
-    foot
-  ), collapse = '\n')
 }
 
 book_dependency <- function() {

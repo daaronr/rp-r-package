@@ -5,14 +5,16 @@
 \title{The Rethink Priorities bookdown output format}
 \usage{
 book(
-  fig_caption = TRUE,
+  toc = TRUE,
   number_sections = TRUE,
-  anchor_sections = TRUE,
+  fig_caption = TRUE,
   lib_dir = "libs",
+  global_numbering = !number_sections,
   pandoc_args = NULL,
-  extra_dependencies = NULL,
-  hide_code = FALSE,
-  ...
+  ...,
+  base_format = rmarkdown::html_document,
+  split_bib = TRUE,
+  split_by = c("section+number", "section", "chapter+number", "chapter", "rmd", "none")
 )
 }
 \description{
