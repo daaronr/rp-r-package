@@ -59,7 +59,7 @@ $endif$
 <style>
   
 :root {
-  --sidebar-width: 16rem;
+  --sidebar-width: $sidebar_width$;
   --primary-color: #43718f;
 }
 
@@ -160,9 +160,6 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
   overflow-y: auto;
   overflow-x: hidden;
   font-size: 0.9rem;
-}
-
-#TOC .toc-section-number {
 }
 
 #TOC a {
@@ -353,6 +350,7 @@ $endfor$
 </script>
 
 <!-- Littlefoot -->
+$if(use_littlefoot)$
 <script
   src="https://unpkg.com/littlefoot/dist/littlefoot.js"
   type="application/javascript"
@@ -360,6 +358,7 @@ $endfor$
 <script type="application/javascript">
   littlefoot.littlefoot() // Pass any littlefoot settings here.
 </script>
+$endif$
 
 <script>
 // Set the current page to be active in the TOC
