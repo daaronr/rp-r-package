@@ -1,18 +1,25 @@
 
 # Update ------------------------------------------------------------------
 
-# Update documentation and (re)install the package
+# Update documentation
 devtools::document()
+
+# Load the package
+devtools::load_all()
+
+# Install the dev version
 devtools::install()
+#.rs.restartR()
 
-# Unload the package and load it again
-detach("package:rethinkpriorities", unload = TRUE)
-library(rethinkpriorities)
+# Setup -------------------------------------------------------------------
 
-# Restart sessions --------------------------------------------------------
+# Use magrittr's pipe in this package 
+usethis::use_pipe(export = TRUE)
 
-.rs.restartR()
-library(rethinkpriorities)
+# Add dependency ----------------------------------------------------------
+
+usethis::use_package("lavaan", "Suggests")
+usethis::use_tidy_description()
 
 # Create a vignette -------------------------------------------------------
 

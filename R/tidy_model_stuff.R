@@ -26,13 +26,9 @@ get_best_result <- function(results_df, id, metric = "rmse"){
 }
 
 #' Not sure what this does ... it is just a syntax helper for extract_fit_parsnip and vi
-
 #'
-#' @examples
 #' this might be obsolete, I don't see it usef atm
 #' best_models$fit[[1]] %>% get_var_importance()
-
-
 #' @export
 
 
