@@ -3,6 +3,7 @@
 #' \code{get_var_importance} is a function to get model fit and make a variable importance plot, I guess
 #' \code{scale_var} is just a code shortcut for scaling
 #' \code{norm_vi} prepares content for importance plots
+#' \code{plot_vi} creqtes varln importance plots
 #'
 #' @param fit is a tune_results object, I think
 #'
@@ -38,5 +39,14 @@ norm_vi <- function(df, slice_top = 7){
     mutate(Variable = fct_reorder(Variable, Norm))
 }
 
+#' @export
+
+plot_vi <- function(df, shapes = shape_colours){
+  # Shortcut function for plotting normalized variable importance (output of norm_vi)
+  df %>% ggplot(aes(y = Variable, x = Norm, colour = model, shape = Sign)) +
+    scale_shape_manual(values = shapes) +
+    geom_point(size = 4, stroke = 5) +
+    xlab("Normalised feature importance") + ylab("")
+}
 
 
