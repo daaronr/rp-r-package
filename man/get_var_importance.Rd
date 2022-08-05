@@ -16,7 +16,7 @@ get_var_importance(fit)
 \code{scale_var} is just a code shortcut for scaling
 \code{norm_vi} prepares content for importance plots
 \code{plot_vi} creqtes varln importance plots
-}
+
 \details{
 \code{get_var_importance}  needs workflowsets and vip packages, part of the tidymodels ecosystem
 }
