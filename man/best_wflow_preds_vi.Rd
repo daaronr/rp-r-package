@@ -28,7 +28,7 @@ Get "best" parameter sets for each modeling approach (RF, DT, GLM-EN), and also 
 returns a tibble of the workflow ('output' is a 'fit workflow') with the best parameters, predictions, true outcomes, and some metrics
 }
 \examples{
-Used in `best_wflow_preds_vi`, also...
+Used in best_wflow_preds_vi, also...
 best_dt_preproc <- best_wflow_preds_vi(preproc_results, metric = 'roc_auc', classification = TRUE,
                                        outcome_var = "showup",
                                        train_sample = eas_all_train,

@@ -2,7 +2,6 @@
 #'
 #' \code{wdwd} is a function that...
 #'
-#' @filename is the name of the (Rmd, Qmd etc) file that will be edited
 #'
 #' @examples
 #' ch_Rmds <- purrr::map(ch_Rmd, tufte_to_footnote)

@@ -2,6 +2,7 @@
 # Update ------------------------------------------------------------------
 
 # Update documentation and (re)install the package
+library(dplyr)
 devtools::document()
 devtools::install()
 

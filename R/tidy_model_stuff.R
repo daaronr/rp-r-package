@@ -3,10 +3,9 @@
 #' @details  Given a workflow extract the best parameters and  the corresponding workflow
 #'
 #' @examples
-#'  Used in `best_wflow_preds_vi`
+#'  Used in best_wflow_preds_vi
 
 #' @export
-
 
 
 get_best_result <- function(results_df, id, metric = "rmse"){
@@ -29,7 +28,7 @@ get_best_result <- function(results_df, id, metric = "rmse"){
 
 #'
 #' @examples
-#' this might be obsolete, I don't see it usef atm
+#' this might be obsolete, I don't see it useful atm
 #' best_models$fit[[1]] %>% get_var_importance()
 
 
@@ -50,7 +49,7 @@ get_var_importance <- function(fit){
 #' @param metric is our measure of fit, I guess, like rmse or roc_auc
 #'
 #' @examples
-#' Used in `best_wflow_preds_vi`, also...
+#' Used in best_wflow_preds_vi, also...
 #' best_dt_preproc <- best_wflow_preds_vi(preproc_results, metric = 'roc_auc', classification = TRUE,
 #'                                        outcome_var = "showup",
 #'                                        train_sample = eas_all_train,

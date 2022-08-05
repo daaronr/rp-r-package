@@ -1,5 +1,4 @@
-# Fit models using columns specifying formulas and required dataframes;
-#
+#' Fit models using columns specifying formulas and required dataframes;
 #'
 #' @details fit_lm as default modeling thing, but fit_glm, etc can also work
 
@@ -18,8 +17,6 @@
 
 
 #' @export
-
-
 
 
 fit_models <- function(df, formulas_col, dfs_col, fun = fit_lm, family = NULL){
