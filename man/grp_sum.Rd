@@ -14,9 +14,6 @@ grp_sum(df, xvar, yvar, groupvar)
 Grouped summary table of 2 variables, mainly for plotting bivariate means by groups
 \code{grp_sum} creates a table of summary statistics on two variables, grouped by a third variable.
 }
-\details{
-
-}
 \examples{
  XXX nothing(mtcars)
 }
