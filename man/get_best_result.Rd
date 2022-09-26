@@ -13,5 +13,5 @@ Extract best parameters etc from tidymodels workflow
 Given a workflow extract the best parameters and  the corresponding workflow
 }
 \examples{
- Used in `best_wflow_preds_vi`
+ Used in best_wflow_preds_vi
 }

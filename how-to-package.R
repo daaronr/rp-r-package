@@ -1,6 +1,9 @@
 
 # Update ------------------------------------------------------------------
 
+# Update documentation and (re)install the package
+library(dplyr)
+
 # Update documentation
 devtools::document()
 
@@ -13,7 +16,7 @@ devtools::install()
 
 # Setup -------------------------------------------------------------------
 
-# Use magrittr's pipe in this package 
+# Use magrittr's pipe in this package
 usethis::use_pipe(export = TRUE)
 
 # Add dependency ----------------------------------------------------------

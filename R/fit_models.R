@@ -11,8 +11,9 @@
 #'     lm_fit = fit_models(
 #'     linear_models, "formulas", "dfs", fun = fit_lm)
 #'   )
-#'   
+#'
 #' @export
+
 fit_models <- function(df, formulas_col, dfs_col, fun = fit_lm, family = NULL){
 
   assertthat::assert_that(is.character(formulas_col) & is.character(dfs_col),

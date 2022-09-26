@@ -13,13 +13,12 @@ Fit models using columns specifying formulas and required dataframes;
 fit_lm as default modeling thing, but fit_glm, etc can also work
 }
 \examples{
-# Create data frame for modeling
+ ## Create dataframe for modeling
 linear_models <- make_model_df(rhs_vars_list, outcome_vars_list, dfs)
 Fit linear models
 linear_models <- linear_models \%>\%
   mutate(
     lm_fit = fit_models(
-    linear_models, "formulas", "dfs", fun = fit_lm)
-  )
-  
+     linear_models, "formulas", "dfs", fun = fit_lm)
+    )
 }
