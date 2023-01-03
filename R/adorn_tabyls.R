@@ -18,14 +18,20 @@
 
 #' @export
 tabylstuff <- function(df, cap = "") {
-  adorn_totals(df, c("row", "col")) %>% adorn_percentages("row") %>%
-    adorn_pct_formatting(digits = 1) %>% adorn_ns() %>% kable(caption = cap) %>%
+  df %>% 
+  adorn_totals(c("row", "col")) %>% 
+    adorn_title() %>% 
+    adorn_percentages("row") %>%
+    adorn_pct_formatting(digits = 1) %>%
+    adorn_ns() %>% 
+    kable(caption = cap) %>%
     kable_styling(latex_options = "scale_down")
 }
 
 #' @export
 tabylstuff_nocol <- function(df, cap=""){
   adorn_totals(df, c("row")) %>%
+    adorn_title() %>% 
     adorn_percentages("row") %>%
     adorn_pct_formatting(digits = 1) %>%
     adorn_ns() %>%
@@ -36,16 +42,20 @@ tabylstuff_nocol <- function(df, cap=""){
 #' @export
 adornme <- function(atabyl, adorn = "row", digits = 2, cap = "",
                     title = "") {
-  atabyl %>% adorn_totals("row") %>% #
-    adorn_percentages(adorn) %>% adorn_pct_formatting(digits = digits) %>%
-    adorn_ns() %>% adorn_title(title, placement = "top") %>%
+  atabyl %>%
+    adorn_totals("row") %>% 
+    adorn_percentages(adorn) %>% 
+    adorn_pct_formatting(digits = digits) %>%
+    adorn_ns() %>% 
+    adorn_title() %>%
     kable(caption = cap) %>% kable_styling()
 }
 
 #' @export
 adornme_not <- function(atabyl, adorn = "row", digits = 2, cap = "") {
   atabyl %>% adorn_totals("row") %>%
-    adorn_percentages(adorn) %>% adorn_pct_formatting(digits = digits) %>%
+    adorn_percentages(adorn) %>%
+    adorn_pct_formatting(digits = digits) %>%
     adorn_ns() %>%
     kable(caption = cap) %>% kable_styling()
 }
