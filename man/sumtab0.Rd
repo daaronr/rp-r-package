@@ -2,12 +2,12 @@
 % Please edit documentation in R/sumtab0.R
 \name{sumtab0}
 \alias{sumtab0}
-\title{sumtab but without kable and adding a few rows}
+\title{sumtab but without removing NAs, no kable and adding a few rows}
 \usage{
 sumtab0(df, depvar, treatvar, caption = "", digits = 3, label = TRUE)
 }
 \description{
-sumtab but without kable and adding a few rows
+sumtab but without removing NAs, no kable and adding a few rows
 }
 \examples{
  sumtab0(movies_long, budget, genre)
